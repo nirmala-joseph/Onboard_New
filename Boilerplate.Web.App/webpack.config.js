@@ -23,7 +23,11 @@ module.exports = {
         {
             test: /\.(s?)css$/,
             loader: 'style-loader!css-loader!sass-loader'
-        },
+            },
+        {
+                test: /\.(jpe?g|png|gif|woff|woff2|eot|ttf|svg)(\?[a-z0-9=.]+)?$/,
+                loader: 'url-loader?limit=100000'
+            },
         {
             test: /\.(js|jsx)$/,
             exclude: /node_modules/,
@@ -32,7 +36,23 @@ module.exports = {
         {
             test: /\.html$/,
             use: { loader: "html-loader" }
-        }
+            },
+            {
+                test: /\.(ttf|eot|svg|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                use: [{
+                    loader: 'file-loader', options: {
+                        name: '[name].[ext]',
+                        outputPath: 'dist/',
+                        publicPath: url => `../dist/${url}`
+                    }
+                }]
+            },
+            {
+                test: /\.(png|jpg|gif)$/,
+                use: [{
+                    loader: 'file-loader'
+                }]
+            }
 
         ]
     },

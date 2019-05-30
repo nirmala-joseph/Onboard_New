@@ -1,77 +1,76 @@
 ﻿// ./src/common/main.component.jsx
 import React, { Component } from 'react';
+import Customer from './customer.jsx';
+import Product from './product.jsx';
+import Store from './store.jsx';
+import Sales from './sales.jsx';
+import 'semantic-ui-css';
+import { Menu, Segment } from 'semantic-ui-react';
+
+
 
 export default class App extends Component {
-    constructor() {
-        super();
+
+    state = { activeItem: 'customers' }
+    handleItemClick = (e, { name }) => {
+        this.setState({ activeItem: name })
     }
-
     render() {
-        return (<div className="container-fluid">
-            <div className='row'>
-                <div className='col-sm-12'>
-                    <div className="main-nav"><nav>
-                        <div className="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
-                            <div className="container">
+        const { activeItem } = this.state
+        let mainPage;
+        if (activeItem == 'customers') {
+            mainPage = <Customer />;
+        }
+        else if (activeItem == 'products') {
+            mainPage = <Product />;
+        }
+        else if (activeItem == 'stores') {
+            mainPage = <Store />;
+        }
+        else if (activeItem == 'sales') {
+            mainPage = <Sales />;
+        }
+        else {
+            mainPage = <Customer />
+        }
 
 
-                                <div className="collapse navbar-collapse" id="navbarResponsive">
-                                    <ul className="nav nav-pills navbar-nav mr-auto">
-                                        <li className="nav-item">
-                                            <a className="nav-link"><i className="fa fa-home fa-fw"></i>Home<span className="sr-only">(current)</span></a>
-                                        </li>
 
-                                    </ul>
 
-                                    <ul className="nav navbar-nav ml-auto">
-
-                                        <span><li className="nav-link">Hi User <button >Logout</button></li> </span>
-
-                                    </ul>
-
-                                </div>
-                            </div>
-                        </div>
-                    </nav>
-
-                    </div>
-                </div>
+        return (
+            //<div> {<Customer />} </div>
+            <div>
+                <Segment inverted>
+                    <Menu inverted secondary>
+                        <Menu.Item name='React' />
+                        <Menu.Item
+                            name='customers'
+                            active={activeItem === 'customers'}
+                            onClick={this.handleItemClick}
+                        />
+                        <Menu.Item
+                            name='products'
+                            active={activeItem === 'products'}
+                            onClick={this.handleItemClick}
+                        />
+                        <Menu.Item
+                            name='stores'
+                            active={activeItem === 'stores'}
+                            onClick={this.handleItemClick}
+                        />
+                        <Menu.Item
+                            name='sales'
+                            active={activeItem === 'sales'}
+                            onClick={this.handleItemClick}
+                        />
+                    </Menu>
+                </Segment>
+                {mainPage}
             </div>
-            <div className='container-fluid' id="body-cover">
-                <div className="row">
-                    <div className="col-md-1 hidden-xs">
-                    </div>
-                    <div className="col-md-3 col-xs-4">
-                        <div className="col">
-                            <div className="card border-primary mb-4">
-                                <img className="card-img-top" alt="Card image cap" src="https://semantic-ui.com/images/avatar/large/joe.jpg" />
-                                <div className="card-body">
-                                    <h4 className="card-title"><a>Mirani</a></h4>
-                                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="#" className="btn btn-primary">Button</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-md-7 col-xs-8">
-                        <div className="jumbotron col">
-                            <h1>This is body </h1>
-                         </div>
-                        <div className="jumbotron col">
-                            This is body
-                         </div>
-                        <div className="jumbotron col">
-                            This is body
-                         </div>
-                    </div>
-                    <div className="col-md-1 hidden-xs">
 
-                    </div>
-                </div>
-            </div>
-            <div className="row">
-                <div className="column"><footer id="footer" >This is Footer</footer></div>
-            </div>
-        </div>);
+        );
     }
 }
+
+    
+

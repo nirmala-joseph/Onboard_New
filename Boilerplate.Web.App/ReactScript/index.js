@@ -1,10 +1,11 @@
 ﻿//import './stylesheets/style.scss';
-import 'bootstrap/dist/css/bootstrap.min.css';
+//import 'bootstrap/dist/css/bootstrap.min.css';
 import './style/myStyle.css';
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import App from './Component/App.jsx';
-import 'bootstrap/dist/js/bootstrap.js'
+//import 'bootstrap/dist/js/bootstrap.js'
+import 'semantic-ui-css/semantic.min.css'
 
 
 function renderApp() {
